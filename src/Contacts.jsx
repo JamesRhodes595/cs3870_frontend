@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const BACKEND_URL = "http://localhost:8081"; // Express+Mongo backend
+const BACKEND_URL = "https://cs3870-backend-hq0q.onrender.com";
 
 function Contacts() {
     // State for all contacts
