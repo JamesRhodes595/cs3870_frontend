@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+const BACKEND_URL = "https://cs3870-backend-hq0q.onrender.com";
+
 export default function OneContact() {
   const [nameQuery, setNameQuery] = useState("");
   const [contact, setContact] = useState(null);
@@ -17,7 +19,7 @@ export default function OneContact() {
 
     try {
       const encoded = encodeURIComponent(trimmed);
-      const res = await fetch(`http://localhost:8081/contacts/${encoded}`);
+      const res = await fetch(`${BACKEND_URL}/contacts/${encoded}`);
 
       if (res.status === 404) {
         setErrorMessage("Contact not found.");

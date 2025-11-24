@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+const BACKEND_URL = "https://cs3870-backend-hq0q.onrender.com";
+
 function DeleteContact() {
     const [name, setName] = useState("");
     const [message, setMessage] = useState("");
@@ -19,7 +21,7 @@ function DeleteContact() {
             console.log("encodeURIComponent:", encodedName);
 
             const res = await fetch(
-                `http://localhost:8081/contacts/${encodedName}`,
+                `${BACKEND_URL}/contacts/${encodedName}`,
                 {
                     method: "DELETE",
                 }

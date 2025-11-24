@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+const BACKEND_URL = "https://cs3870-backend-hq0q.onrender.com";
+
 function UpdateContact() {
     const [originalName, setOriginalName] = useState("");
     const [newName, setNewName] = useState("");
@@ -22,14 +24,13 @@ function UpdateContact() {
             const encodedName = encodeURIComponent(trimmedOriginal);
 
             const res = await fetch(
-                `http://localhost:8081/contacts/${encodedName}`,
+                `${BACKEND_URL}/contacts/${encodedName}`,
                 {
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify({
-                        // if newName is empty, backend will keep original
                         contact_name: newName,
                         phone_number: phoneNumber,
                         message: message,
@@ -42,11 +43,13 @@ function UpdateContact() {
 
             if (!res.ok) {
                 setResponseMsg(
-                    data?.message || `Failed to update contact (HTTP ${res.status}).`
+                    data?.message ||
+                    `Failed to update contact (HTTP ${res.status}).`
                 );
             } else {
                 setResponseMsg(
-                    data?.message || `Contact '${trimmedOriginal}' updated successfully.`
+                    data?.message ||
+                    `Contact '${trimmedOriginal}' updated successfully.`
                 );
             }
         } catch (err) {

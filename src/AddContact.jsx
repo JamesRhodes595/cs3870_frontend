@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+const BACKEND_URL = "https://cs3870-backend-hq0q.onrender.com";
+
 export default function AddContact() {
     const [contact_name, setName] = useState("");
     const [phone_number, setPhone] = useState("");
@@ -12,7 +14,7 @@ export default function AddContact() {
         setResponseMsg("");
 
         try {
-            const response = await fetch("http://localhost:8081/contacts", {
+            const response = await fetch(`${BACKEND_URL}/contacts`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -25,6 +27,14 @@ export default function AddContact() {
 
             const data = await response.json();
             setResponseMsg(data.message || "Done!");
+
+            // Optional: clear inputs after success
+            if (response.ok) {
+                setName("");
+                setPhone("");
+                setMessage("");
+                setImage("");
+            }
 
         } catch (err) {
             setResponseMsg("Error: " + err.message);
